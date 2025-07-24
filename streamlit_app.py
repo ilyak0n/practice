@@ -8,7 +8,7 @@ import matplotlib.pyplot as plt
 
 from sklearn.preprocessing import OrdinalEncoder
 from sklearn.model_selection import train_test_split
-from sklearn.metrics import mean_squared_error, mean_absolute_error, mean_absolute_percentage_error
+from sklearn.metrics import mean_squared_error, mean_absolute_error, mean_absolute_percentage_error, root_mean_squared_error
 from xgboost import XGBRegressor
 
 
@@ -150,11 +150,12 @@ def main():
 
     with tab4:
         st.subheader('Метрики качества модели')
-        col1, col2, col3 = st.columns(3)
+        col1, col2, col3, col4 = st.columns(4)
 
         col1.metric('(MAPE) Средняя абсолютная ошибка в процентах: ', f'{(mean_absolute_percentage_error(Y_test, Y_pred) * 100):.4f}')
         col2.metric('(MSE) Среднеквадратическая ошибка: ', f'{mean_squared_error(Y_test, Y_pred):.4f}')
         col3.metric('(MAE) Средняя абсолютная ошибка: ', f'{mean_absolute_error(Y_test, Y_pred):.4f}')
+        col4.metric('(RMSE) Корень из среднеквадратической ошибки: ', f'{root_mean_squared_error(Y_test, Y_pred):.4f}')
 
 if __name__ == "__main__":
     main()
